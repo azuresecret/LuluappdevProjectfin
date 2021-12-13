@@ -3,30 +3,23 @@ import { FlatList, View } from 'react-native';
 import React from 'react';
 import MenuData from '../resources/loadMenuImage';
 import globalStyle from '../styles/globalStyle';
-import MenuDetails from './MenuDetails';
 import MenuItem from './MenuItems';
 
 function MenuScreen({
-  submitting,
-  setSubmitting,
   updateUserOrderedItem,
   orderedItemMap,
-  setOrderedItemMap,
   screenType,
-  tabNavigation,
   mainNavigation,
 }) {
-  const renderMenuItem = ({ item, navigation }) => (
+  const renderMenuItem = ({ item }) => (
 
     <MenuItem
       item={item}
       onPress={({ orderedPieces, setOrderedPieces }) => {
-        // tabNavigation.setOptions({ headerShown: false });
         mainNavigation.push('Details', {
           item, updateUserOrderedItem, orderedPieces, setOrderedPieces, orderedItemMap,
         });
       }}
-      // onPress={({ orderedPieces, setOrderedPieces }) => updateUserOrderedItem({ orderedPieces, setOrderedPieces, item })}
       orderedItemMap={orderedItemMap}
     />
   );

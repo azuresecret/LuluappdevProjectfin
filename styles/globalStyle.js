@@ -10,25 +10,42 @@ const globalStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '100%',
   },
   buttonStyle: {
-    backgroundColor: '#009688',
+   // backgroundColor: '#009688',
     flex: 1,
     padding: 20,
     margin: 10,
-    borderRadius: '50%',
+    borderRadius: 10,
+  },
+  cartButton: {
+    width: '50%',
+    maxWidth: 300,
+    marginHorizontal: 'auto',
   },
   CartIcon: {
-    maxHeight: '300px',
-    maxWidth: '300px',
+    maxHeight: 300,
+    maxWidth: 300,
     height: '25%',
     width: '48%',
     marginHorizontal: 'auto',
+  },
+  CartTotalPrice: {
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  CartInstruction: {
+    flex: 1,
+    margin: 'auto',
+    width: '85%',
+    borderStyle: 'solid',
   },
   CartContainer: {
     flex: 1,
     height: '100%',
     width: '100%',
+    alignItems: 'center',
   },
   googleButton: {
     height: 36,
@@ -52,7 +69,7 @@ const globalStyle = StyleSheet.create({
   },
   homeTitle: {
     fontSize: 30,
-    fontWeight: 500,
+    fontWeight: '500',
     color: 'cyan',
     opacity: 1,
   },
@@ -67,13 +84,13 @@ const globalStyle = StyleSheet.create({
     // justifyContent: 'space-between'
   },
   priceText: {
-    float: 'right',
+   // float: 'right',
   },
   itemDetailText: {
     // flex: 1,
     fontSize: 15,
     padding: 20,
-    float: 'left',
+    //float: 'left',
   },
   cartItemText: {
     fontSize: 20,
@@ -82,7 +99,7 @@ const globalStyle = StyleSheet.create({
   },
   itemDetailTitle: {
     fontSize: 25,
-    fontWeight: 500,
+    fontWeight: '500',
     padding: 40,
   },
   item: {
@@ -104,6 +121,7 @@ const globalStyle = StyleSheet.create({
   ItemDetailContainer: {
     marginHorizontal: 'auto',
     textAlign: 'center',
+    alignItems: 'center',
     height: '100%',
     width: '100%',
   },
@@ -112,8 +130,8 @@ const globalStyle = StyleSheet.create({
     width: '100%',
   },
   detailedImage: {
-    maxHeight: '400px',
-    maxWidth: '400px',
+    maxHeight: 400,
+    maxWidth: 400,
     height: '50%',
     width: '80%',
     marginHorizontal: 'auto',
@@ -132,9 +150,8 @@ const globalStyle = StyleSheet.create({
   },
   menuLogo: {
     height: win.width / 2 - 50,
-
-    maxHeight: '300px',
-    maxWidth: '300px',
+    maxHeight: 300,
+    maxWidth: 300,
     width: '100%',
   },
   roundButton1: {

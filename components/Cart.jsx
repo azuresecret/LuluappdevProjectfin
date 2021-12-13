@@ -1,9 +1,13 @@
 import {
-  FlatList, View, Text, Image, Animated,
+  FlatList, View, Text, Image, Animated, TextInput,
 } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
 import { fromJS } from 'immutable';
 import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
+import AwesomeButton from 'react-native-really-awesome-button/src/themes/cartman';
+import {
+  getDatabase, ref, child, set,
+} from 'firebase/database';
 import globalStyle from '../styles/globalStyle';
 import UserContext from '../contexts/User';
 
@@ -61,7 +65,22 @@ function CartScreen({ menuData }) {
   // flatlist requires an array of data to render stuff, and orderedItemList is that array for it to use.
   const [orderedItemList, setOrderedItemList] = useState([]);
   const [orderedTotalPrice, setOrderedTotalPrice] = useState(0);
+  const [instruction, setInstruction] = useState('');
+  const [submitted, setSubmitted] = useState(false);
   const flattenedMenuArray = Object.values(menuData).flat();
+
+  const getHeaderText = () => {
+    if (submitted) return 'Congratulations, your order has been submitted';
+    return orderedItemList.length ? 'The items below are in your cart' : 'Your cart is empty, please go to the menu to order some food.';
+  };
+
+  const submitButtonClicked = () => {
+    const db = getDatabase();
+    set(ref(db, `users/${user.get('id')}`), user.toJS()).then(r => {
+
+      setSubmitted(true);
+    });
+  };
 
   useEffect(() => {
     if (user.get('orderedItem')) {
@@ -71,7 +90,7 @@ function CartScreen({ menuData }) {
       let previousTotalPrice = 0;
       Object.entries(storedOrderedItemMap).forEach(([id, quant]) => {
         const correctItem = flattenedMenuArray.find((ele) => ele.id === id);
-        console.log('this is correct', correctItem);
+
         if (!correctItem) {
           return console.error('cannot locate ordered item from menudata');
         }
@@ -108,7 +127,7 @@ function CartScreen({ menuData }) {
 
   return (
     <View style={globalStyle.CartContainer}>
-      {orderedItemList.length ? <Text> Your ordered items are below </Text> : <Text>{cartEmptyString}</Text>}
+      <Text>{getHeaderText()}</Text>
       <FlatList
         data={orderedItemList}
         extraData={orderedItemList}
@@ -116,7 +135,33 @@ function CartScreen({ menuData }) {
         numColumns={1}
         renderItem={renderCartItem}
       />
-      {orderedTotalPrice ? <Text> Your total price is  ${orderedTotalPrice} </Text> : null }
+
+      <TextInput
+        multiline
+        onChangeText={(t) => setInstruction(t)}
+        placeholder={'please enter your additional instruction here'}
+        style={globalStyle.CartInstruction}
+        value={instruction}
+      />
+
+      {orderedTotalPrice ? (
+        <Text style={globalStyle.CartTotalPrice}>
+          {' '}
+          Your total price is  $
+          {orderedTotalPrice}
+        </Text>
+      ) : null }
+
+      <AwesomeButton
+        onPress={submitButtonClicked}
+        progress
+        stretch
+        style={submitted ? { display: 'none' } : globalStyle.cartButton}
+      >
+        <Text>Submit</Text>
+
+      </AwesomeButton>
+
     </View>
   );
 }

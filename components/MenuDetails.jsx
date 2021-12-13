@@ -7,18 +7,13 @@ function MenuDetails({ route }) {
   const {
     item, updateUserOrderedItem, orderedItemMap, orderedPieces,
   } = route.params;
-  console.log(orderedPieces, 'this is update', updateUserOrderedItem);
   const [orderedPiece, setOrderedPiece] = useState(orderedPieces);
-  //  const itemDetails = route.params.item;
-  // const updateUserOrderedItem = route.params.updateUserOrderedItem;
 
   useEffect(() => {
     if (orderedItemMap[item.id]) {
       setOrderedPiece(orderedItemMap[item.id]);
     }
   }, [orderedItemMap]);
-
-
 
   return (
     <View style={globalStyle.ItemDetailContainer}>
@@ -40,7 +35,17 @@ function MenuDetails({ route }) {
         {'      '}
         {orderedPiece }
       </Text>
-      <AwesomeButtonRick onPress={() => updateUserOrderedItem({ orderedPieces: orderedPiece, setOrderedPieces: setOrderedPiece, item })} stretch style={globalStyle.detailButtonStyle}>ADD TO CART</AwesomeButtonRick>
+      <AwesomeButtonRick
+        onPress={
+          () => updateUserOrderedItem({
+            orderedPieces: orderedPiece, setOrderedPieces: setOrderedPiece, item,
+          })
+        }
+        stretch
+        style={globalStyle.detailButtonStyle}
+      >
+        ADD TO CART
+      </AwesomeButtonRick>
     </View>
   );
 }
