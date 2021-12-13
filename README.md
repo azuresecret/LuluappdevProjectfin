@@ -1,6 +1,8 @@
-## App Name: 
+## App Name: Just Order
 
 ### Elevator pitch:
+
+Customers can log into their Google accounts to place orders for food. A lot of restaurants choose to register with some large delivery apps such as DoorDash and UberEats, but they are charged with a relatively high commission fee. This app wants to make the order-service more affordable to the restaurant owners. In detail, by incorporating their own pick up/delivery apps into their business, some restaurants probably end up saving money. In addition, they can use our app for in-store ordering.
  
 
 ### ChangeList: 
@@ -46,3 +48,6 @@ list:
   - [x] The movie shows the app running through the terminal with expo start
   - [x] The movies shows the App running on a phone!
   
+
+### Screenrecording link: 
+shorturl.at/qwLS9
